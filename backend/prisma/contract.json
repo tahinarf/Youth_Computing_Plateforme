@@ -1,0 +1,1984 @@
+{
+  "schemaVersion": "1",
+  "targetFamily": "sql",
+  "target": "postgres",
+  "profileHash": "3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2",
+  "roots": {
+    "activite": {
+      "model": "Activite",
+      "namespace": "public"
+    },
+    "activite_intervenant": {
+      "model": "ActiviteIntervenant",
+      "namespace": "public"
+    },
+    "inscription": {
+      "model": "Inscription",
+      "namespace": "public"
+    },
+    "intervenant": {
+      "model": "Intervenant",
+      "namespace": "public"
+    },
+    "participant": {
+      "model": "Participant",
+      "namespace": "public"
+    },
+    "presence": {
+      "model": "Presence",
+      "namespace": "public"
+    },
+    "role": {
+      "model": "Role",
+      "namespace": "public"
+    },
+    "sessions": {
+      "model": "Sessions",
+      "namespace": "public"
+    },
+    "utilisateur": {
+      "model": "Utilisateur",
+      "namespace": "public"
+    }
+  },
+  "domain": {
+    "namespaces": {
+      "public": {
+        "models": {
+          "Activite": {
+            "fields": {
+              "capacite": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "dateDebut": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/date-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "dateFin": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/date-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "description": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "heureDebut": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/time-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "heureFin": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/time-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "idActivite": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "idUtilisateur": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "lieu": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 200
+                  }
+                }
+              },
+              "mode": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 50
+                  }
+                }
+              },
+              "statut": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 50
+                  }
+                }
+              },
+              "titre": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 200
+                  }
+                }
+              },
+              "typeActivite": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              }
+            },
+            "relations": {
+              "activiteIntervenants": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "idActivite"
+                  ],
+                  "targetFields": [
+                    "idActivite"
+                  ]
+                },
+                "to": {
+                  "model": "ActiviteIntervenant",
+                  "namespace": "public"
+                }
+              },
+              "inscriptions": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "idActivite"
+                  ],
+                  "targetFields": [
+                    "idActivite"
+                  ]
+                },
+                "to": {
+                  "model": "Inscription",
+                  "namespace": "public"
+                }
+              },
+              "sessions": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "idActivite"
+                  ],
+                  "targetFields": [
+                    "idActivite"
+                  ]
+                },
+                "to": {
+                  "model": "Sessions",
+                  "namespace": "public"
+                }
+              },
+              "utilisateur": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "idUtilisateur"
+                  ],
+                  "targetFields": [
+                    "idUtilisateur"
+                  ]
+                },
+                "to": {
+                  "model": "Utilisateur",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "capacite": {
+                  "column": "capacite"
+                },
+                "dateDebut": {
+                  "column": "date_debut"
+                },
+                "dateFin": {
+                  "column": "date_fin"
+                },
+                "description": {
+                  "column": "description"
+                },
+                "heureDebut": {
+                  "column": "heure_debut"
+                },
+                "heureFin": {
+                  "column": "heure_fin"
+                },
+                "idActivite": {
+                  "column": "id_activite"
+                },
+                "idUtilisateur": {
+                  "column": "id_utilisateur"
+                },
+                "lieu": {
+                  "column": "lieu"
+                },
+                "mode": {
+                  "column": "mode"
+                },
+                "statut": {
+                  "column": "statut"
+                },
+                "titre": {
+                  "column": "titre"
+                },
+                "typeActivite": {
+                  "column": "type_activite"
+                }
+              },
+              "namespaceId": "public",
+              "table": "activite"
+            }
+          },
+          "ActiviteIntervenant": {
+            "fields": {
+              "idActivite": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "idIntervenant": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "activite": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "idActivite"
+                  ],
+                  "targetFields": [
+                    "idActivite"
+                  ]
+                },
+                "to": {
+                  "model": "Activite",
+                  "namespace": "public"
+                }
+              },
+              "intervenant": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "idIntervenant"
+                  ],
+                  "targetFields": [
+                    "idIntervenant"
+                  ]
+                },
+                "to": {
+                  "model": "Intervenant",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "idActivite": {
+                  "column": "id_activite"
+                },
+                "idIntervenant": {
+                  "column": "id_intervenant"
+                }
+              },
+              "namespaceId": "public",
+              "table": "activite_intervenant"
+            }
+          },
+          "Inscription": {
+            "fields": {
+              "dateInscription": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "idActivite": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "idInscription": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "idParticipant": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "statut": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 50
+                  }
+                }
+              }
+            },
+            "relations": {
+              "activite": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "idActivite"
+                  ],
+                  "targetFields": [
+                    "idActivite"
+                  ]
+                },
+                "to": {
+                  "model": "Activite",
+                  "namespace": "public"
+                }
+              },
+              "participant": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "idParticipant"
+                  ],
+                  "targetFields": [
+                    "idParticipant"
+                  ]
+                },
+                "to": {
+                  "model": "Participant",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "dateInscription": {
+                  "column": "date_inscription"
+                },
+                "idActivite": {
+                  "column": "id_activite"
+                },
+                "idInscription": {
+                  "column": "id_inscription"
+                },
+                "idParticipant": {
+                  "column": "id_participant"
+                },
+                "statut": {
+                  "column": "statut"
+                }
+              },
+              "namespaceId": "public",
+              "table": "inscription"
+            }
+          },
+          "Intervenant": {
+            "fields": {
+              "email": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 150
+                  }
+                }
+              },
+              "fonction": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "idIntervenant": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "nom": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "organisme": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 150
+                  }
+                }
+              },
+              "prenom": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "telephone": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 20
+                  }
+                }
+              }
+            },
+            "relations": {
+              "activiteIntervenants": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "idIntervenant"
+                  ],
+                  "targetFields": [
+                    "idIntervenant"
+                  ]
+                },
+                "to": {
+                  "model": "ActiviteIntervenant",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "email": {
+                  "column": "email"
+                },
+                "fonction": {
+                  "column": "fonction"
+                },
+                "idIntervenant": {
+                  "column": "id_intervenant"
+                },
+                "nom": {
+                  "column": "nom"
+                },
+                "organisme": {
+                  "column": "organisme"
+                },
+                "prenom": {
+                  "column": "prenom"
+                },
+                "telephone": {
+                  "column": "telephone"
+                }
+              },
+              "namespaceId": "public",
+              "table": "intervenant"
+            }
+          },
+          "Participant": {
+            "fields": {
+              "dateNaissance": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/date-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "email": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 150
+                  }
+                }
+              },
+              "idParticipant": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "niveauEtude": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "nom": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "prenom": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "profession": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "region": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "sexe": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 20
+                  }
+                }
+              },
+              "telephone": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 20
+                  }
+                }
+              },
+              "ville": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              }
+            },
+            "relations": {
+              "inscriptions": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "idParticipant"
+                  ],
+                  "targetFields": [
+                    "idParticipant"
+                  ]
+                },
+                "to": {
+                  "model": "Inscription",
+                  "namespace": "public"
+                }
+              },
+              "presences": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "idParticipant"
+                  ],
+                  "targetFields": [
+                    "idParticipant"
+                  ]
+                },
+                "to": {
+                  "model": "Presence",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "dateNaissance": {
+                  "column": "date_naissance"
+                },
+                "email": {
+                  "column": "email"
+                },
+                "idParticipant": {
+                  "column": "id_participant"
+                },
+                "niveauEtude": {
+                  "column": "niveau_etude"
+                },
+                "nom": {
+                  "column": "nom"
+                },
+                "prenom": {
+                  "column": "prenom"
+                },
+                "profession": {
+                  "column": "profession"
+                },
+                "region": {
+                  "column": "region"
+                },
+                "sexe": {
+                  "column": "sexe"
+                },
+                "telephone": {
+                  "column": "telephone"
+                },
+                "ville": {
+                  "column": "ville"
+                }
+              },
+              "namespaceId": "public",
+              "table": "participant"
+            }
+          },
+          "Presence": {
+            "fields": {
+              "dateEnregistrement": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "idParticipant": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "idPresence": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "idSession": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "observation": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "statutPresence": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 50
+                  }
+                }
+              }
+            },
+            "relations": {
+              "participant": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "idParticipant"
+                  ],
+                  "targetFields": [
+                    "idParticipant"
+                  ]
+                },
+                "to": {
+                  "model": "Participant",
+                  "namespace": "public"
+                }
+              },
+              "sessions": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "idSession"
+                  ],
+                  "targetFields": [
+                    "idSession"
+                  ]
+                },
+                "to": {
+                  "model": "Sessions",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "dateEnregistrement": {
+                  "column": "date_enregistrement"
+                },
+                "idParticipant": {
+                  "column": "id_participant"
+                },
+                "idPresence": {
+                  "column": "id_presence"
+                },
+                "idSession": {
+                  "column": "id_session"
+                },
+                "observation": {
+                  "column": "observation"
+                },
+                "statutPresence": {
+                  "column": "statut_presence"
+                }
+              },
+              "namespaceId": "public",
+              "table": "presence"
+            }
+          },
+          "Role": {
+            "fields": {
+              "description": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "idRole": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "nomRole": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              }
+            },
+            "relations": {
+              "utilisateurs": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "idRole"
+                  ],
+                  "targetFields": [
+                    "idRole"
+                  ]
+                },
+                "to": {
+                  "model": "Utilisateur",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "description": {
+                  "column": "description"
+                },
+                "idRole": {
+                  "column": "id_role"
+                },
+                "nomRole": {
+                  "column": "nom_role"
+                }
+              },
+              "namespaceId": "public",
+              "table": "role"
+            }
+          },
+          "Sessions": {
+            "fields": {
+              "dateSession": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/date-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "heureDebut": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/time-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "heureFin": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/time-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "idActivite": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "idSession": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "libelle": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 200
+                  }
+                }
+              },
+              "lieu": {
+                "nullable": true,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 200
+                  }
+                }
+              }
+            },
+            "relations": {
+              "activite": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "idActivite"
+                  ],
+                  "targetFields": [
+                    "idActivite"
+                  ]
+                },
+                "to": {
+                  "model": "Activite",
+                  "namespace": "public"
+                }
+              },
+              "presences": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "idSession"
+                  ],
+                  "targetFields": [
+                    "idSession"
+                  ]
+                },
+                "to": {
+                  "model": "Presence",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "dateSession": {
+                  "column": "date_session"
+                },
+                "heureDebut": {
+                  "column": "heure_debut"
+                },
+                "heureFin": {
+                  "column": "heure_fin"
+                },
+                "idActivite": {
+                  "column": "id_activite"
+                },
+                "idSession": {
+                  "column": "id_session"
+                },
+                "libelle": {
+                  "column": "libelle"
+                },
+                "lieu": {
+                  "column": "lieu"
+                }
+              },
+              "namespaceId": "public",
+              "table": "sessions"
+            }
+          },
+          "Utilisateur": {
+            "fields": {
+              "email": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 150
+                  }
+                }
+              },
+              "idRole": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "idUtilisateur": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "motDePasse": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 255
+                  }
+                }
+              },
+              "nom": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "prenom": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "statut": {
+                "nullable": false,
+                "type": {
+                  "codecId": "sql/varchar@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "length": 50
+                  }
+                }
+              }
+            },
+            "relations": {
+              "activites": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "idUtilisateur"
+                  ],
+                  "targetFields": [
+                    "idUtilisateur"
+                  ]
+                },
+                "to": {
+                  "model": "Activite",
+                  "namespace": "public"
+                }
+              },
+              "role": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "idRole"
+                  ],
+                  "targetFields": [
+                    "idRole"
+                  ]
+                },
+                "to": {
+                  "model": "Role",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "email": {
+                  "column": "email"
+                },
+                "idRole": {
+                  "column": "id_role"
+                },
+                "idUtilisateur": {
+                  "column": "id_utilisateur"
+                },
+                "motDePasse": {
+                  "column": "mot_de_passe"
+                },
+                "nom": {
+                  "column": "nom"
+                },
+                "prenom": {
+                  "column": "prenom"
+                },
+                "statut": {
+                  "column": "statut"
+                }
+              },
+              "namespaceId": "public",
+              "table": "utilisateur"
+            }
+          }
+        }
+      }
+    }
+  },
+  "storage": {
+    "namespaces": {
+      "public": {
+        "entries": {
+          "table": {
+            "activite": {
+              "checks": [
+                {
+                  "expression": "(capacite >= 0)",
+                  "name": "chk_activite_capacite"
+                },
+                {
+                  "expression": "(date_fin >= date_debut)",
+                  "name": "chk_activite_dates"
+                },
+                {
+                  "expression": "((heure_fin IS NULL) OR (heure_debut IS NULL) OR (heure_fin > heure_debut))",
+                  "name": "chk_activite_heures"
+                }
+              ],
+              "columns": {
+                "capacite": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "kind": "literal",
+                    "value": 0
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "date_debut": {
+                  "codecId": "pg/date-temporal@1",
+                  "nativeType": "date",
+                  "nullable": false
+                },
+                "date_fin": {
+                  "codecId": "pg/date-temporal@1",
+                  "nativeType": "date",
+                  "nullable": false
+                },
+                "description": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "heure_debut": {
+                  "codecId": "pg/time-temporal@1",
+                  "nativeType": "time",
+                  "nullable": true
+                },
+                "heure_fin": {
+                  "codecId": "pg/time-temporal@1",
+                  "nativeType": "time",
+                  "nullable": true
+                },
+                "id_activite": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "id_utilisateur": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "lieu": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 200
+                  }
+                },
+                "mode": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 50
+                  }
+                },
+                "statut": {
+                  "codecId": "sql/varchar@1",
+                  "default": {
+                    "kind": "literal",
+                    "value": "PLANIFIEE"
+                  },
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 50
+                  }
+                },
+                "titre": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 200
+                  }
+                },
+                "type_activite": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "foreignKeys": [
+                {
+                  "name": "fk_activite_utilisateur",
+                  "onDelete": "restrict",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "id_utilisateur"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "activite"
+                  },
+                  "target": {
+                    "columns": [
+                      "id_utilisateur"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "utilisateur"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id_activite"
+                ],
+                "name": "activite_pkey"
+              },
+              "uniques": []
+            },
+            "activite_intervenant": {
+              "columns": {
+                "id_activite": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "id_intervenant": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "name": "fk_ai_activite",
+                  "onDelete": "cascade",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "id_activite"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "activite_intervenant"
+                  },
+                  "target": {
+                    "columns": [
+                      "id_activite"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "activite"
+                  }
+                },
+                {
+                  "name": "fk_ai_intervenant",
+                  "onDelete": "cascade",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "id_intervenant"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "activite_intervenant"
+                  },
+                  "target": {
+                    "columns": [
+                      "id_intervenant"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "intervenant"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id_activite",
+                  "id_intervenant"
+                ],
+                "name": "activite_intervenant_pkey"
+              },
+              "uniques": []
+            },
+            "inscription": {
+              "columns": {
+                "date_inscription": {
+                  "codecId": "pg/timestamp-temporal@1",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nativeType": "timestamp",
+                  "nullable": false
+                },
+                "id_activite": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "id_inscription": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "id_participant": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "statut": {
+                  "codecId": "sql/varchar@1",
+                  "default": {
+                    "kind": "literal",
+                    "value": "EN_ATTENTE"
+                  },
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 50
+                  }
+                }
+              },
+              "foreignKeys": [
+                {
+                  "name": "fk_inscription_activite",
+                  "onDelete": "cascade",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "id_activite"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "inscription"
+                  },
+                  "target": {
+                    "columns": [
+                      "id_activite"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "activite"
+                  }
+                },
+                {
+                  "name": "fk_inscription_participant",
+                  "onDelete": "cascade",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "id_participant"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "inscription"
+                  },
+                  "target": {
+                    "columns": [
+                      "id_participant"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "participant"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id_inscription"
+                ],
+                "name": "inscription_pkey"
+              },
+              "uniques": [
+                {
+                  "columns": [
+                    "id_participant",
+                    "id_activite"
+                  ],
+                  "name": "uq_participant_activite"
+                }
+              ]
+            },
+            "intervenant": {
+              "columns": {
+                "email": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 150
+                  }
+                },
+                "fonction": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 100
+                  }
+                },
+                "id_intervenant": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "nom": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 100
+                  }
+                },
+                "organisme": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 150
+                  }
+                },
+                "prenom": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 100
+                  }
+                },
+                "telephone": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 20
+                  }
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id_intervenant"
+                ],
+                "name": "intervenant_pkey"
+              },
+              "uniques": []
+            },
+            "participant": {
+              "columns": {
+                "date_naissance": {
+                  "codecId": "pg/date-temporal@1",
+                  "nativeType": "date",
+                  "nullable": true
+                },
+                "email": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 150
+                  }
+                },
+                "id_participant": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "niveau_etude": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 100
+                  }
+                },
+                "nom": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 100
+                  }
+                },
+                "prenom": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 100
+                  }
+                },
+                "profession": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 100
+                  }
+                },
+                "region": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 100
+                  }
+                },
+                "sexe": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 20
+                  }
+                },
+                "telephone": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 20
+                  }
+                },
+                "ville": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id_participant"
+                ],
+                "name": "participant_pkey"
+              },
+              "uniques": [
+                {
+                  "columns": [
+                    "email"
+                  ],
+                  "name": "participant_email_key"
+                }
+              ]
+            },
+            "presence": {
+              "columns": {
+                "date_enregistrement": {
+                  "codecId": "pg/timestamp-temporal@1",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nativeType": "timestamp",
+                  "nullable": false
+                },
+                "id_participant": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "id_presence": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "id_session": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "observation": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "statut_presence": {
+                  "codecId": "sql/varchar@1",
+                  "default": {
+                    "kind": "literal",
+                    "value": "ABSENT"
+                  },
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 50
+                  }
+                }
+              },
+              "foreignKeys": [
+                {
+                  "name": "fk_presence_participant",
+                  "onDelete": "cascade",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "id_participant"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "presence"
+                  },
+                  "target": {
+                    "columns": [
+                      "id_participant"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "participant"
+                  }
+                },
+                {
+                  "name": "fk_presence_session",
+                  "onDelete": "cascade",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "id_session"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "presence"
+                  },
+                  "target": {
+                    "columns": [
+                      "id_session"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "sessions"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id_presence"
+                ],
+                "name": "presence_pkey"
+              },
+              "uniques": [
+                {
+                  "columns": [
+                    "id_participant",
+                    "id_session"
+                  ],
+                  "name": "uq_presence_participant_session"
+                }
+              ]
+            },
+            "role": {
+              "columns": {
+                "description": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "id_role": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "nom_role": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 100
+                  }
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id_role"
+                ],
+                "name": "role_pkey"
+              },
+              "uniques": [
+                {
+                  "columns": [
+                    "nom_role"
+                  ],
+                  "name": "role_nom_role_key"
+                }
+              ]
+            },
+            "sessions": {
+              "checks": [
+                {
+                  "expression": "((heure_fin IS NULL) OR (heure_debut IS NULL) OR (heure_fin > heure_debut))",
+                  "name": "chk_session_heures"
+                }
+              ],
+              "columns": {
+                "date_session": {
+                  "codecId": "pg/date-temporal@1",
+                  "nativeType": "date",
+                  "nullable": false
+                },
+                "heure_debut": {
+                  "codecId": "pg/time-temporal@1",
+                  "nativeType": "time",
+                  "nullable": true
+                },
+                "heure_fin": {
+                  "codecId": "pg/time-temporal@1",
+                  "nativeType": "time",
+                  "nullable": true
+                },
+                "id_activite": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "id_session": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "libelle": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 200
+                  }
+                },
+                "lieu": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": true,
+                  "typeParams": {
+                    "length": 200
+                  }
+                }
+              },
+              "foreignKeys": [
+                {
+                  "name": "fk_session_activite",
+                  "onDelete": "cascade",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "id_activite"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "sessions"
+                  },
+                  "target": {
+                    "columns": [
+                      "id_activite"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "activite"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id_session"
+                ],
+                "name": "sessions_pkey"
+              },
+              "uniques": []
+            },
+            "utilisateur": {
+              "columns": {
+                "email": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 150
+                  }
+                },
+                "id_role": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "id_utilisateur": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "mot_de_passe": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 255
+                  }
+                },
+                "nom": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 100
+                  }
+                },
+                "prenom": {
+                  "codecId": "sql/varchar@1",
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 100
+                  }
+                },
+                "statut": {
+                  "codecId": "sql/varchar@1",
+                  "default": {
+                    "kind": "literal",
+                    "value": "ACTIF"
+                  },
+                  "nativeType": "character varying",
+                  "nullable": false,
+                  "typeParams": {
+                    "length": 50
+                  }
+                }
+              },
+              "foreignKeys": [
+                {
+                  "name": "fk_utilisateur_role",
+                  "onDelete": "restrict",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "id_role"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "utilisateur"
+                  },
+                  "target": {
+                    "columns": [
+                      "id_role"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "role"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id_utilisateur"
+                ],
+                "name": "utilisateur_pkey"
+              },
+              "uniques": [
+                {
+                  "columns": [
+                    "email"
+                  ],
+                  "name": "utilisateur_email_key"
+                }
+              ]
+            }
+          }
+        },
+        "id": "public",
+        "kind": "postgres-schema"
+      }
+    },
+    "storageHash": "55dea0cd117960544b1212a24003004c48fadd0f317ac0cf42e978c068cec4b7"
+  },
+  "capabilities": {
+    "postgres": {
+      "distinctOn": true,
+      "jsonAgg": true,
+      "lateral": true,
+      "limit": true,
+      "orderBy": true,
+      "returning": true
+    },
+    "sql": {
+      "checkConstraint": true,
+      "defaultInInsert": true,
+      "enums": true,
+      "lateral": true,
+      "returning": true,
+      "scalarList": true
+    }
+  },
+  "extensions": {},
+  "meta": {},
+  "_generated": {
+    "warning": "⚠️  GENERATED FILE - DO NOT EDIT",
+    "message": "This file is automatically generated by \"prisma contract emit\".",
+    "regenerate": "To regenerate, run: prisma contract emit"
+  }
+}

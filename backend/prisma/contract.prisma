@@ -1,0 +1,133 @@
+// use prisma-8
+// Contract inferred from the live database schema. Edit as needed, then run `prisma contract emit`.
+
+model Role {
+  idRole       Int           @id(map: "role_pkey") @default(autoincrement()) @map("id_role")
+  nomRole      VarChar(100)  @unique(map: "role_nom_role_key") @map("nom_role")
+  description  String?
+  utilisateurs Utilisateur[]
+
+  @@map("role")
+}
+
+model Utilisateur {
+  idUtilisateur Int          @id(map: "utilisateur_pkey") @default(autoincrement()) @map("id_utilisateur")
+  idRole        Int          @map("id_role")
+  nom           VarChar(100)
+  prenom        VarChar(100)
+  email         VarChar(150) @unique(map: "utilisateur_email_key")
+  motDePasse    VarChar(255) @map("mot_de_passe")
+  statut        VarChar(50)  @default("ACTIF")
+  activites     Activite[]
+  role          Role         @relation(fields: [idRole], references: [idRole], onDelete: Restrict, onUpdate: Cascade, map: "fk_utilisateur_role", index: false)
+
+  @@map("utilisateur")
+}
+
+model Activite {
+  idActivite           Int                   @id(map: "activite_pkey") @default(autoincrement()) @map("id_activite")
+  idUtilisateur        Int                   @map("id_utilisateur")
+  titre                VarChar(200)
+  typeActivite         VarChar(100)          @map("type_activite")
+  description          String?
+  dateDebut            Date                  @map("date_debut")
+  dateFin              Date                  @map("date_fin")
+  heureDebut           Time?                 @map("heure_debut")
+  heureFin             Time?                 @map("heure_fin")
+  lieu                 VarChar(200)?
+  mode                 VarChar(50)?
+  capacite             Int                   @default(0)
+  statut               VarChar(50)           @default("PLANIFIEE")
+  activiteIntervenants ActiviteIntervenant[]
+  inscriptions         Inscription[]
+  sessions             Sessions[]
+  utilisateur          Utilisateur           @relation(fields: [idUtilisateur], references: [idUtilisateur], onDelete: Restrict, onUpdate: Cascade, map: "fk_activite_utilisateur", index: false)
+
+  @@check(expression: "(capacite >= 0)", map: "chk_activite_capacite")
+  @@check(expression: "(date_fin >= date_debut)", map: "chk_activite_dates")
+  @@check(expression: "((heure_fin IS NULL) OR (heure_debut IS NULL) OR (heure_fin > heure_debut))", map: "chk_activite_heures")
+  @@map("activite")
+}
+
+model Intervenant {
+  idIntervenant        Int                   @id(map: "intervenant_pkey") @default(autoincrement()) @map("id_intervenant")
+  nom                  VarChar(100)
+  prenom               VarChar(100)
+  fonction             VarChar(100)?
+  organisme            VarChar(150)?
+  email                VarChar(150)?
+  telephone            VarChar(20)?
+  activiteIntervenants ActiviteIntervenant[]
+
+  @@map("intervenant")
+}
+
+model ActiviteIntervenant {
+  idActivite    Int         @map("id_activite")
+  idIntervenant Int         @map("id_intervenant")
+  activite      Activite    @relation(fields: [idActivite], references: [idActivite], onDelete: Cascade, onUpdate: Cascade, map: "fk_ai_activite", index: false)
+  intervenant   Intervenant @relation(fields: [idIntervenant], references: [idIntervenant], onDelete: Cascade, onUpdate: Cascade, map: "fk_ai_intervenant", index: false)
+
+  @@id([idActivite, idIntervenant], map: "activite_intervenant_pkey")
+  @@map("activite_intervenant")
+}
+
+model Participant {
+  idParticipant Int           @id(map: "participant_pkey") @default(autoincrement()) @map("id_participant")
+  nom           VarChar(100)
+  prenom        VarChar(100)
+  sexe          VarChar(20)?
+  dateNaissance Date?         @map("date_naissance")
+  telephone     VarChar(20)?
+  email         VarChar(150)? @unique(map: "participant_email_key")
+  niveauEtude   VarChar(100)? @map("niveau_etude")
+  profession    VarChar(100)?
+  ville         VarChar(100)?
+  region        VarChar(100)?
+  inscriptions  Inscription[]
+  presences     Presence[]
+
+  @@map("participant")
+}
+
+model Inscription {
+  idInscription   Int         @id(map: "inscription_pkey") @default(autoincrement()) @map("id_inscription")
+  idParticipant   Int         @map("id_participant")
+  idActivite      Int         @map("id_activite")
+  dateInscription Timestamp   @default(now()) @map("date_inscription")
+  statut          VarChar(50) @default("EN_ATTENTE")
+  activite        Activite    @relation(fields: [idActivite], references: [idActivite], onDelete: Cascade, onUpdate: Cascade, map: "fk_inscription_activite", index: false)
+  participant     Participant @relation(fields: [idParticipant], references: [idParticipant], onDelete: Cascade, onUpdate: Cascade, map: "fk_inscription_participant", index: false)
+
+  @@unique([idParticipant, idActivite], map: "uq_participant_activite")
+  @@map("inscription")
+}
+
+model Sessions {
+  idSession   Int           @id(map: "sessions_pkey") @default(autoincrement()) @map("id_session")
+  idActivite  Int           @map("id_activite")
+  libelle     VarChar(200)
+  dateSession Date          @map("date_session")
+  heureDebut  Time?         @map("heure_debut")
+  heureFin    Time?         @map("heure_fin")
+  lieu        VarChar(200)?
+  presences   Presence[]
+  activite    Activite      @relation(fields: [idActivite], references: [idActivite], onDelete: Cascade, onUpdate: Cascade, map: "fk_session_activite", index: false)
+
+  @@check(expression: "((heure_fin IS NULL) OR (heure_debut IS NULL) OR (heure_fin > heure_debut))", map: "chk_session_heures")
+  @@map("sessions")
+}
+
+model Presence {
+  idPresence         Int         @id(map: "presence_pkey") @default(autoincrement()) @map("id_presence")
+  idParticipant      Int         @map("id_participant")
+  idSession          Int         @map("id_session")
+  statutPresence     VarChar(50) @default("ABSENT") @map("statut_presence")
+  dateEnregistrement Timestamp   @default(now()) @map("date_enregistrement")
+  observation        String?
+  participant        Participant @relation(fields: [idParticipant], references: [idParticipant], onDelete: Cascade, onUpdate: Cascade, map: "fk_presence_participant", index: false)
+  sessions           Sessions    @relation(fields: [idSession], references: [idSession], onDelete: Cascade, onUpdate: Cascade, map: "fk_presence_session", index: false)
+
+  @@unique([idParticipant, idSession], map: "uq_presence_participant_session")
+  @@map("presence")
+}
