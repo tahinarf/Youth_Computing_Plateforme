@@ -1,4 +1,4 @@
-:root {
+/*:root {
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -108,4 +108,78 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+*/
+
+
+
+/* Importation de la police principale. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+/* Variables générales de l'application. */
+:root {
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+
+  color: #17243b;
+  background: #f5f7fb;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --primary: #173b70;
+  --primary-light: #2855c5;
+  --background: #f5f7fb;
+  --surface: #ffffff;
+  --text: #17243b;
+  --muted: #778398;
+  --border: #e8edf4;
+  --success: #119b84;
+  --danger: #e05b79;
+}
+
+/* Réinitialisation générale. */
+* {
+  box-sizing: border-box;
+}
+
+/* Configuration du document. */
+html {
+  min-width: 320px;
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+/* Configuration du corps de page. */
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Configuration du point d'entrée React. */
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Uniformisation des contrôles. */
+button,
+input,
+select {
+  font: inherit;
+}
+
+/* Liens. */
+a {
+  color: inherit;
+}
+
+/* Titres. */
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
 }

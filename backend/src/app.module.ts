@@ -22,8 +22,20 @@ import { ActivitesController } from './activites/activites.controller.js';
 // Importe le contrôleur responsable de la gestion des sessions.
 import { SessionsController } from './sessions/sessions.controller.js';
 
+// Importe le contrôleur responsable de la gestion des inscriptions.
+import { InscriptionsController } from './inscriptions/inscriptions.controller.js';
+
+// Importe le contrôleur responsable de la gestion des présences.
+import { PresencesController } from './presences/presences.controller.js';
+
 // Crée le module d'observation et son instrument.
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
+
+// Importe le contrôleur responsable de la gestion des intervenants.
+import { IntervenantsController } from './intervenants/intervenants.controller.js';
+
+// Importe le contrôleur des associations entre activités et intervenants.
+import { ActiviteIntervenantsController } from './activite-intervenants/activite-intervenants.controller.js';
 
 // Définit le module principal de l'application NestJS.
 @Module({
@@ -62,6 +74,21 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
     // Contrôleur permettant de gérer les sessions.
     SessionsController,
+
+    // Contrôleur des inscriptions.
+    InscriptionsController,
+
+    // Contrôleur de gestion des présences.
+    PresencesController,
+
+    // Contrôleur de gestion des intervenants.
+    IntervenantsController,
+
+    // Contrôleur des associations entre activités et intervenants.
+    ActiviteIntervenantsController,
+
+  
+
   ],
 
   // Déclare les services utilisés par le module.
